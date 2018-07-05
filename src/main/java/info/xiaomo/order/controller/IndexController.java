@@ -1,5 +1,7 @@
 package info.xiaomo.order.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
  * desc  :
  */
 @RestController
+@RefreshScope
 public class IndexController {
+
+
+    @Value("${env}")
+    private String env;
 
     @GetMapping("/")
     public String index(){
-        return "订单服务可用";
+        return "订单服务可用,当前环境:" + env;
     }
 }
